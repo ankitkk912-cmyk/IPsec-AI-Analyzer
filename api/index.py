@@ -1,7 +1,8 @@
 import sys
 import os
 
-# Backend folder ko Python path me add karein
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'backend'))
+backend_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'backend'))
+sys.path.insert(0, backend_dir)
+os.chdir(backend_dir)
 
 from app import app
