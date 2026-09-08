@@ -1,9 +1,14 @@
 import sys
 import os
 
-# Root directory ko path me add karein
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-if root_dir not in sys.path:
-    sys.path.insert(0, root_dir)
+# Root aur Backend dono paths ko python path me add karein
+base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+backend_dir = os.path.join(base_dir, 'backend')
 
-from backend.app import app
+sys.path.insert(0, base_dir)
+sys.path.insert(0, backend_dir)
+
+try:
+    from backend.app import app
+except Exception:
+    from app import app
