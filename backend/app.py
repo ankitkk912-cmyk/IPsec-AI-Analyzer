@@ -3,11 +3,16 @@ from werkzeug.utils import secure_filename
 from pathlib import Path
 import os
 import base64
-
-from database import init_db, save_analysis, list_analyses, get_analysis
-from analyzer import analyze_config
-from report_generator import create_pdf_report
-from ai_engine import get_ai_explanation
+try:
+    from backend.database import init_db, save_analysis, list_analyses, get_analysis
+    from backend.analyzer import analyze_config
+    from backend.report_generator import create_pdf_report
+    from backend.ai_engine import get_ai_explanation
+except ImportError:
+    from database import init_db, save_analysis, list_analyses, get_analysis
+    from analyzer import analyze_config
+    from report_generator import create_pdf_report
+    from ai_engine import get_ai_explanation
 
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -19,7 +24,7 @@ except Exception:
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
 
-app.config["MAX_CONTENT_LENGTH"] = 2 * 1024 * 1024git 
+app.config["MAX_CONTENT_LENGTH"] = 2 * 1024 * 1024 
 
 try:
     init_db()
