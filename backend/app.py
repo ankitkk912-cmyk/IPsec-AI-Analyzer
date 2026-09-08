@@ -12,13 +12,19 @@ from ai_engine import get_ai_explanation
 
 BASE_DIR = Path(__file__).resolve().parent
 UPLOAD_DIR = BASE_DIR.parent / "uploads"
-UPLOAD_DIR.mkdir(exist_ok=True)
+try:
+    UPLOAD_DIR.mkdir(exist_ok=True)
+except Exception:
+    pass
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
 
 app.config["MAX_CONTENT_LENGTH"] = 2 * 1024 * 1024
 
-init_db()
+try:
+    init_db()
+except Exception as e:
+    print("Database skipped on Vercel:", e)
 
 ALLOWED_EXTENSIONS = {
     ".conf",
