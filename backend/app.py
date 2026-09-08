@@ -19,7 +19,7 @@ except Exception:
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
 
-app.config["MAX_CONTENT_LENGTH"] = 2 * 1024 * 1024
+app.config["MAX_CONTENT_LENGTH"] = 2 * 1024 * 1024git 
 
 try:
     init_db()
