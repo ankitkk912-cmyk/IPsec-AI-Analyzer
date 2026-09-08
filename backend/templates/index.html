@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>IPsec AI Analyzer</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="logo">◈</div>
+      <div><b>IPsec AI</b><span>Analyzer</span></div>
+    </div>
+    <nav>
+      <a class="active" href="#dashboard">Dashboard</a>
+      <a href="#findings">Security Findings</a>
+      <a href="#history">Analysis History</a>
+      <a href="#about">How it works</a>
+    </nav>
+    <div class="side-note">
+      <span class="dot"></span>
+      Local analysis engine online
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">NETWORK SECURITY</p>
+        <h1>IPsec Security Command Center</h1>
+        <p class="muted">Analyze VPN configuration, identify security gaps and generate a professional report.</p>
+      </div>
+      <div class="status"><span class="pulse"></span> System Ready</div>
+    </header>
+
+    <section id="dashboard" class="hero-grid">
+      <div class="upload-card glass">
+        <div class="card-head">
+          <div>
+            <p class="eyebrow">STEP 01</p>
+            <h2>Upload IPsec Configuration</h2>
+          </div>
+          <span class="badge">.conf / .cfg / .txt</span>
+        </div>
+
+        <label class="dropzone" id="dropzone">
+         <input
+    type="file"
+    id="configFile"
+    accept=".conf,.cfg,.txt,.json,.ini,.png,.jpg,.jpeg,.webp"
+>
+          <div class="upload-icon">↑</div>
+          <strong id="fileName">Drop your configuration here</strong>
+          <span>or click to browse</span>
+        </label>
+
+        <button id="analyzeBtn" class="primary-btn" disabled>
+          Analyze Configuration <span>→</span>
+        </button>
+        <p id="message" class="message"></p>
+      </div>
+
+      <div class="score-card glass">
+        <p class="eyebrow">SECURITY POSTURE</p>
+        <div class="score-ring">
+          <div>
+            <strong id="score">—</strong>
+            <span>/100</span>
+          </div>
+        </div>
+        <div id="risk" class="risk neutral">Waiting for analysis</div>
+        <p id="summary" class="muted center">Upload a configuration to see your security posture.</p>
+      </div>
+    </section>
+
+    <section class="stat-grid">
+      <div class="stat glass"><span>Checks</span><strong id="checks">0</strong></div>
+      <div class="stat glass"><span>Passed</span><strong id="passed">0</strong></div>
+      <div class="stat glass"><span>Warnings</span><strong id="warnings">0</strong></div>
+      <div class="stat glass"><span>Failed</span><strong id="failed">0</strong></div>
+    </section>
+
+    <section id="findings" class="panel glass">
+      <div class="section-head">
+        <div><p class="eyebrow">STEP 02</p><h2>Security Findings</h2></div>
+        <div class="actions">
+          <button id="aiBtn" class="secondary-btn" disabled>✦ AI Explain</button>
+          <button id="reportBtn" class="secondary-btn" disabled>↓ PDF Report</button>
+        </div>
+      </div>
+      <div id="findingsList" class="findings-empty">Run an analysis to populate findings.</div>
+    </section>
+
+    <section class="panel glass">
+      <div class="section-head">
+        <div><p class="eyebrow">STEP 03</p><h2>Recommended Actions</h2></div>
+      </div>
+      <div id="recommendations" class="recommendations"></div>
+    </section>
+
+    <section id="history" class="panel glass">
+      <div class="section-head"><div><p class="eyebrow">DATABASE</p><h2>Recent Analyses</h2></div></div>
+      <div id="historyList" class="history-list">Loading…</div>
+    </section>
+
+    <section id="about" class="panel glass about">
+      <p class="eyebrow">ARCHITECTURE</p>
+      <h2>How this demo works</h2>
+      <div class="flow">
+        <div><b>1</b><span>Upload</span><small>Config file</small></div>
+        <i>→</i>
+        <div><b>2</b><span>Parse</span><small>Python engine</small></div>
+        <i>→</i>
+        <div><b>3</b><span>Score</span><small>Security rules</small></div>
+        <i>→</i>
+        <div><b>4</b><span>Store</span><small>SQLite database</small></div>
+        <i>→</i>
+        <div><b>5</b><span>Report</span><small>PDF + optional AI</small></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div id="modal" class="modal hidden">
+  <div class="modal-box glass">
+    <button id="closeModal" class="close">×</button>
+    <p class="eyebrow">AI SECURITY EXPLANATION</p>
+    <h2>Defensive Analysis</h2>
+    <div id="aiText" class="ai-text">Generating…</div>
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
