@@ -16,7 +16,7 @@ except ImportError:
 
 
 BASE_DIR = Path(__file__).resolve().parent
-UPLOAD_DIR = BASE_DIR.parent / "uploads"
+UPLOAD_DIR = Path("/tmp/uploads")
 try:
     UPLOAD_DIR.mkdir(exist_ok=True)
 except Exception:

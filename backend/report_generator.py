@@ -5,8 +5,8 @@ from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, Tabl
 from reportlab.lib import colors
 from reportlab.lib.styles import getSampleStyleSheet
 
-REPORT_DIR = Path(__file__).resolve().parent.parent / "uploads"
-REPORT_DIR.mkdir(exist_ok=True)
+REPORT_DIR = Path("/tmp/uploads")
+REPORT_DIR.mkdir(parents=True, exist_ok=True)
 
 def create_pdf_report(item):
     result = item["result"]
